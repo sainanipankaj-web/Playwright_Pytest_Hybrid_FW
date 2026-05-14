@@ -3,9 +3,13 @@ from pages.login_page import LoginPage
 
 from config.settings import BASE_URL_SAUCEDEMO
 from testdata.test_data import USERNAME,PASSWORD
+import pytest
 
 
-def test_valid_login(login_page,screenshot_on_finish):
+#@pytest.mark.smoke
+@pytest.mark.ui
+@pytest.mark.login
+def test_valid_login_using_pom(login_page,screenshot_on_finish):
 
     # login = LoginPage(page)
 
