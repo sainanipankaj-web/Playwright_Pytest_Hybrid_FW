@@ -5,15 +5,16 @@ from config.settings import BASE_URL_SAUCEDEMO
 from testdata.test_data import USERNAME,PASSWORD
 
 
-def test_valid_login(page: Page):
+def test_valid_login(login_page,screenshot_on_finish):
 
-    login = LoginPage(page)
+    # login = LoginPage(page)
 
-    login.open_application(BASE_URL_SAUCEDEMO)
+    # login.open_application(BASE_URL_SAUCEDEMO)
 
-    login.login(
+    login_page.login(
         USERNAME,
         PASSWORD
     )
 
-    login.verify_login_success()
+    login_page.verify_login_success()
+
