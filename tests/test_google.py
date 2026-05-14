@@ -9,4 +9,4 @@ def test_google_title(page: Page, screenshot_on_finish):
 
     print(f"Page title is: {title}")
 
-    assert "google" in title.lower(), "Title does not contain 'google'"
+    assert "google" in title.strip().lower(), "Title does not contain 'google'"

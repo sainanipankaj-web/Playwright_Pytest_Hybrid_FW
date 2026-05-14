@@ -114,5 +114,7 @@ venv.bak/
 
 # Playwright
 test-results/
+reports/
+screenshots/
 playwright-report/
 playwright/.cache/

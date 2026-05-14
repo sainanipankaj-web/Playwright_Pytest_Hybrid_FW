@@ -6,7 +6,7 @@ from testdata.test_data import USERNAME,PASSWORD
 import pytest
 
 
-#@pytest.mark.smoke
+@pytest.mark.smoke
 @pytest.mark.ui
 @pytest.mark.login
 def test_valid_login_using_pom(login_page,screenshot_on_finish):
