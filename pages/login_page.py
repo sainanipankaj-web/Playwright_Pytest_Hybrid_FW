@@ -12,8 +12,8 @@ class LoginPage:
         self.login_btn = page.get_by_role("button", name="Login")
         self.products_title = page.get_by_text("Products")
 
-    def open_application(self):
-        self.page.goto("https://www.saucedemo.com")
+    def open_application(self, url):
+        self.page.goto(url)
 
     def login(self, username, password):
         self.username.fill(username)
