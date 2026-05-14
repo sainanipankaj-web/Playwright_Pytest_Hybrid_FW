@@ -1,7 +1,22 @@
+from datetime import datetime
+from xmlrpc import client
+
 import pytest
 from playwright.sync_api import Page
 from config.settings import BASE_URL_SAUCEDEMO
 import os
+import allure
+from api.api_client import APIClient
+
+
+@pytest.fixture(scope="session")
+def api_client():
+
+    client = APIClient()
+
+    yield client
+
+    client.session.close()
 
 
 @pytest.fixture()
@@ -35,18 +50,21 @@ def screenshot_on_finish( page, request):
     )
 
 @pytest.hookimpl(hookwrapper=True)
-def pytest_runtest_makereport(item,call):
-    
-    outcome=yield
+def pytest_runtest_makereport(
+        item,
+        call
+):
 
-    report=outcome.get_result()
+    outcome = yield
+
+    report = outcome.get_result()
 
 
-    if report.when=="call":
+    if report.when == "call":
 
         if report.failed:
 
-            page=item.funcargs.get(
+            page = item.funcargs.get(
                 "page"
             )
 
@@ -57,7 +75,38 @@ def pytest_runtest_makereport(item,call):
                     exist_ok=True
                 )
 
-                page.screenshot(
-                    path=
-                    f"screenshots/{item.name}.png"
+                timestamp = datetime.now().strftime(
+                    "%Y%m%d_%H%M%S"
                 )
+
+                file_name = (
+                    f"{item.name}_{timestamp}.png"
+                )
+
+                screenshot_path = (
+                    f"screenshots/{file_name}"
+                )
+
+                # Save in folder
+                page.screenshot(
+                    path=screenshot_path
+                )
+
+                # Attach same file to Allure
+                allure.attach.file(
+                    screenshot_path,
+
+                    name=f"{item.name}_failure",
+
+                    attachment_type=
+                    allure.attachment_type.PNG
+                )
+
+@pytest.fixture(scope="session")
+def api_client():
+
+    client = APIClient()
+
+    yield client
+
+    client.session.close()

@@ -14,7 +14,7 @@ class LoginPage:
         self.username = page.get_by_placeholder("Username")
         self.password = page.get_by_placeholder("Password")
         self.login_btn = page.get_by_role("button", name="Login")
-        self.products_title = page.get_by_text("Products")
+        self.products_title = page.get_by_text("Productsss")
 
     def open_application(self, url):
         logger.info(

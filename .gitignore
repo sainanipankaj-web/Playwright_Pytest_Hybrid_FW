@@ -116,5 +116,6 @@ venv.bak/
 test-results/
 reports/
 screenshots/
+allure-results/
 playwright-report/
 playwright/.cache/
